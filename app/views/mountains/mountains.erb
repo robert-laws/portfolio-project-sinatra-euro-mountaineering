@@ -1,7 +1,7 @@
 <ul>
   <% @mountains.each do |m| %>
     <li>
-      <%= m.name %>
+      <a href="/mountains/<%= m.slug %>"><%= m.name %></a>
     </li>
   <% end %>
 </ul>
