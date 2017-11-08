@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/************ BEGIN NAVIGATION **************/
+
+nav {
+  background-color: #333;
+  margin-bottom: 50px;
+}
+
+.logo {
+  float: left;
+  margin-right: 15px;
+}
+
+.logo img {
+  height: 68px;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 0px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+nav ul li {
+  float: left;
+}
+
+nav ul li.login {
+  float: right;
+  padding-right: 20px;
+}
+
+nav ul li a {
+  display: block;
+  color: #FFF;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background-color: #111;
+}
+
+nav ul li.login a:hover {
+  background-color: green;
+}
+
+@media screen and (max-width: 600px) {
+  .logo {
+    float: none;
+    text-align: center;
+    margin-right: 0px;
+  }
+
+  .logo img {
+    height: 60px;
+    margin-left: 0px;
+    margin-bottom: 5px;
+  }
+
+  nav ul li, nav ul li.login {
+    float: none;
+    padding-right: 0px;
+  }
+}
+
+/************ END NAVIGATION **************/
+
+
+
+/************ BEGIN MAIN **************/
+
+main {
+  margin: 20px;
+}
+
+figure {
+  width: 210px;
+  border: 1px solid #DDD;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+figcaption {
+  padding: 4px 10px;
+  font-size: 0.8em;
+  background-color: #333;
+  color: #FFF;
+  border-radius: 0px 0px 6px 6px;
+}
+
+figure img {
+  width: 200px;
+  margin: 5px;
+}
+
+/************ END MAIN **************/
+
+
+
+/************ BEGIN FOOTER **************/
+
+footer {
+  background-color: #333;
+  color: #FFF;
+  padding: 20px;
+  text-align: center;
+}
+
+/************ END FOOTER **************/

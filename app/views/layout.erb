@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Euro Mountaineering</title>
+  <link rel="stylesheet" href="stylesheets/styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="/">
+          <img src="images/mountain_club_v3.png" alt="logo">
+        </a>
+      </div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Clubs</a></li>    
+        <li><a href="/mountains">Mountains</a></li>
+        <li><a href="#">About</a></li>    
+        <li class="login">
+          <a href="#">Login</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <%= yield %>
+  </main>
+
+  <footer>
+    <p><small>&copy; 2017 - Euro Mountaineering</small></p>
+  </footer>
+</body>
+</html>
