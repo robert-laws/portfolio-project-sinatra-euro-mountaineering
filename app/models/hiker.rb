@@ -7,5 +7,5 @@ class Hiker < ActiveRecord::Base
   extend Slugifiable::ClassMethods
   include Slugifiable::InstanceMethods
 
-  # has_secure_password
+  has_secure_password
 end

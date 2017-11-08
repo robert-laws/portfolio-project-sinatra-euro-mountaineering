@@ -6,6 +6,6 @@ end
 
 use Rack::MethodOverride
 
-# use HikersController
-# use MountainsController
+use HikersController
+use MountainsController
 run ApplicationController
