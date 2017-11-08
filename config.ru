@@ -6,6 +6,6 @@ end
 
 use Rack::MethodOverride
 
-# use FiguresController
-# use LandmarksController
+# use HikersController
+# use MountainsController
 run ApplicationController

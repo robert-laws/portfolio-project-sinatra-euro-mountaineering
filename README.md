@@ -11,7 +11,7 @@ There are three main models used and a fourth linking model.
 * Hiker
 * Mountain
 * Club
-* Hikers_Mountains
+* Hiker_Mountains
 
 ## Controllers
 
