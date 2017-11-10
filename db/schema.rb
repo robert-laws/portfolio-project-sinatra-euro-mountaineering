@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 4) do
+ActiveRecord::Schema.define(version: 7) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(version: 4) do
   create_table "hiker_mountains", force: :cascade do |t|
     t.integer "hiker_id"
     t.integer "mountain_id"
+    t.string "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "hike_date"
   end
 
   create_table "hikers", force: :cascade do |t|

@@ -1,0 +1,11 @@
+<h1>Hiker Account Info</h1>
+
+<p><%= @hiker.first_name %> <%= @hiker.last_name %></p>
+
+<p>You are a member of the <%= @hiker.club.name %>.</p>
+
+<h4>Hike Details</h4>
+<p>Mountain: <%= @mountain.name %></p>
+<p>Height: <%= @mountain.height %></p>
+<p>Hike Date: <%= @details.hike_date.strftime("%B %d, %Y") %></p>
+<p>Comments: <%= @details.comments %></p>
