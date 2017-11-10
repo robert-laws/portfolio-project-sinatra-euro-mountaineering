@@ -1,0 +1,12 @@
+<h1>Signup for Euro Mountaineering</h1>
+<section>
+    <form action="/signup" method="POST">
+      <label><span>First Name:</span><input type="text" name="first_name" id="first_name"></label> <span><%= @valid[:fn]%></span>
+      <label><span>Last Name:</span> <input type="text" name="last_name" id="last_name"></label> <span><%= @valid[:ln] %></span>
+      <label><span>Email:</span> <input type="text" name="user_email" id="user_email"></label> <span><%= @valid[:em] %></span>
+      <hr>
+      <label><span>Username:</span> <input type="text" name="username" id="username"></label> <span><%= @valid[:un] %></span>
+      <label><span>Password:</span> <input type="password" name="password" id="password"></label> <span><%= @valid[:pw] %></span>
+      <input type="submit" id="submit" name="submit" value="Create Account">
+    </form>
+</section>

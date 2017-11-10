@@ -132,3 +132,48 @@ footer {
 /******** END SVG EUROPE MAP **********/
 
 
+/******** BEGIN FORMS *****************/
+form {
+  max-width: 600px;
+  padding: 20px 12px 10px 20px;
+}
+
+form label {
+  display: inline-block;
+  margin: 12px 0px;
+}
+
+form label > span {
+  width: 100px;
+  font-weight: bold;
+  float: left;
+  padding-top: 2px;
+  padding-right: 5px;
+}
+
+form label > input {
+  width: 300px;
+  padding: 4px;
+}
+
+form input[type=submit] {
+  border: none;
+  font-weight: bold;
+  padding: 8px 15px 8px 15px;
+  background: rgb(0, 92, 197);
+  color: #fff;
+  margin-top: 10px;
+  margin-left: 105px;
+}
+
+form label + span {
+  padding-top: 2px;
+  margin-left: 2px;
+  color: red;
+}
+
+form hr {
+  width: 95%;
+  margin: 12px auto;
+}
+/******** END FORMS *******************/
