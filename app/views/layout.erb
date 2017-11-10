@@ -21,7 +21,11 @@
         <li><a href="/mountains">Mountains</a></li>
         <li><a href="#">About</a></li>    
         <li class="login">
-          <a href="/login">Login</a>
+          <% if session[:hiker_id] %>
+            <a href="/logout">Logout</a>
+          <% else %>
+            <a href="/login">Login</a>
+          <% end %>
         </li>
       </ul>
     </nav>
