@@ -9,4 +9,20 @@ class ApplicationController < Sinatra::Base
   get "/" do
     erb :index
   end
+
+  get "/login" do
+    erb :login
+  end
+
+  post "/login" do
+    
+  end
+
+  get "/account" do
+    erb :account
+  end
+
+  post "/account" do
+    
+  end
 end
