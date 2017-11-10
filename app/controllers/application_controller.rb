@@ -76,6 +76,7 @@ class ApplicationController < Sinatra::Base
       @hiker = Hiker.find_by(username: params[:username])
       if @hiker == nil
         @h = Hiker.create(params)
+        session[:hiker_id] = @h.id
         redirect("/hikers/#{@h.id}")
       else
         erb :signup

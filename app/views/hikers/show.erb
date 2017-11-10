@@ -4,11 +4,10 @@
 
 <p>You are a member of the <%= @hiker.club.name %>.</p>
 
-<h3>Here are your completed hikes so far:</h3>
-<p>Click on a hike to edit it.</p>
-<ul>
-  <% @hiker.mountains.each do |mountain| %>
-    <li><a href="/hikers/<%= session[:hiker_id] %>/edit/<%= mountain.id %>"><%= mountain.name %></a></li>
-  <% end %>
-</ul>
+<h4>Hike Details</h4>
+<p>Mountain: <%= @mountain.name %></p>
+<p>Height: <%= @mountain.height %></p>
+<p>Hike Date: <%= @details.hike_date.strftime("%B %d, %Y") %></p>
+<p>Comments: <%= @details.comments %></p>
 
+<p><a href="/hikers/<%= session[:hiker_id] %>/edit/<%= @mountain.id %>">edit this hike</a></p>
