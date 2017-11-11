@@ -1,7 +1,35 @@
 <h1>Add a New Hike</h1>
+<form action="/hikers/new" method="POST">
+  <span>Mountain:</span>
+  <select name="mountain_id">
+    <% Mountain.all.each do |mountain| %>
+      <option value="<%= mountain.id %>"><%= mountain.name %></option>
+    <% end %>
+  </select>
 
-<%# Mountain Choice %>
+  <span>Month:</span>
+  <select name="month">
+    <% (1..12).each do |v| %>
+      <option value="<%= v %>"><%= v %></option>
+    <% end %>
+  </select>
 
-<%# Date Choice %>
+  <span>Day:</span>
+  <select name="day">
+    <% (1..31).each do |v| %>
+      <option value="<%= v %>"><%= v %></option>
+    <% end %>
+  </select>
 
-<%# Comments %>
+  <span>Year:</span>
+  <select name="year">
+    <% (2017..2020).each do |v| %>
+      <option value="<%= v %>"><%= v %></option>
+    <% end %>
+  </select>
+
+  <span>Comments:</span>
+  <textarea name="comments" id="comments" rows="5" cols="50"></textarea>
+
+  <input type="submit" name="submit" id="submit" value="Create New Hike">
+</form>

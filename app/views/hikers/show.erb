@@ -5,9 +5,9 @@
 <p>You are a member of the <%= @hiker.club.name %>.</p>
 
 <h4>Hike Details</h4>
-<p>Mountain: <%= @mountain.name %></p>
-<p>Height: <%= @mountain.height %></p>
-<p>Hike Date: <%= @details.hike_date.strftime("%B %d, %Y") %></p>
-<p>Comments: <%= @details.comments %></p>
+<p>Mountain: <%= Mountain.find(@hm.mountain_id).name %></p>
+<p>Height: <%= Mountain.find(@hm.mountain_id).height %></p>
+<p>Hike Date: <%= @hm.hike_date.strftime("%B %d, %Y") %></p>
+<p>Comments: <%= @hm.comments %></p>
 
-<p><a href="/hikers/edit/<%= @mountain.id %>">edit this hike</a></p>
+<p><a href="/hikers/edit/<%= @hm.id %>">edit this hike</a></p>

@@ -2,6 +2,7 @@ class HikersController < ApplicationController
   get "/hikers" do
     if logged_in?
       @hiker = Hiker.find(session[:hiker_id])
+      @hiker_mountains = HikerMountain.where(hiker_id: @hiker.id)
       erb :'hikers/index'
     else
       redirect("/login")
@@ -27,23 +28,60 @@ class HikersController < ApplicationController
     end
   end
 
-  get "/hikers/show/:mountain_id" do
-    @hiker = Hiker.find(session[:hiker_id])
-    @mountain = Mountain.find(params[:mountain_id])
-    @details = HikerMountain.find_by(hiker_id: @hiker.id, mountain_id: @mountain.id)
+  get "/hikers/show/:id" do
+    if logged_in?
+      @hiker = Hiker.find(session[:hiker_id])
+      @hm = HikerMountain.find(params[:id])
 
-    erb :'hikers/show'
+      erb :'hikers/show'
+    else
+      redirect("/login")
+    end
   end
 
-  get "/hikers/edit/:mountain_id" do
-    @hiker = Hiker.find(session[:hiker_id])
-    @mountain = Mountain.find(params[:mountain_id])
-    @details = HikerMountain.find_by(hiker_id: @hiker.id, mountain_id: @mountain.id)
+  get "/hikers/edit/:id" do
+    if logged_in?
+      @hiker = Hiker.find(session[:hiker_id])
+      @hm = HikerMountain.find(params[:id])
+      hike_date = @hm.hike_date.to_s.split("-")
+      @year = hike_date[0]
+      @month = hike_date[1]
+      @day = hike_date[2].split(" ")[0]
 
-    erb :'hikers/edit'
+      erb :'hikers/edit'
+    else
+      redirect("/login")
+    end
+  end
+
+  post "/hikers/edit/:id" do
+    if params[:comments] == ""
+      redirect("/hikers/edit/#{params[:id]}")
+    else
+      date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+      mountain_id = params[:mountain_id]
+      @hm = HikerMountain.find(params[:id])
+      @hm.update(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
+      redirect("/hikers/show/#{@hm.id}")
+    end
   end
 
   get "/hikers/new" do
-    erb :'hikers/new'
+    if logged_in?
+      erb :'hikers/new'
+    else
+      redirect("/login")
+    end
+  end
+
+  post "/hikers/new" do
+    if params[:comments] == ""
+      redirect("/hikers/new")
+    else
+      date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+      mountain_id = params[:mountain_id]
+      @hm = HikerMountain.create(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
+      redirect("/hikers/show/#{@hm.id}")
+    end
   end
 end
