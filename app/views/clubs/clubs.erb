@@ -1,7 +1,7 @@
 <ul>
   <% @clubs.each do |c| %>
     <li>
-      <%= c.name %>
+      <a href="/clubs/<%= c.slug %>"><%= c.name %></a>
     </li>
   <% end %>
 </ul>

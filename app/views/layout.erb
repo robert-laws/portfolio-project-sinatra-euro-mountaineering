@@ -17,9 +17,17 @@
       </div>
       <ul>
         <li><a href="/">Home</a></li>
+        <li class="login">
         <li><a href="/clubs">Clubs</a></li>    
         <li><a href="/mountains">Mountains</a></li>
-        <li><a href="#">About</a></li>    
+        <li><a href="#">About</a></li>
+        <% if session[:hiker_id] %>
+          <li><a href="/hikers">Your Account</a></li>
+          <li><a href="/hikers/new">Add a New Hike</a></li>
+        <% else %>
+
+        <% end %>
+
         <li class="login">
           <% if session[:hiker_id] %>
             <a href="/logout">Logout</a>
