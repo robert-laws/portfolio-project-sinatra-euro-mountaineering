@@ -10,4 +10,4 @@
 <p>Hike Date: <%= @details.hike_date.strftime("%B %d, %Y") %></p>
 <p>Comments: <%= @details.comments %></p>
 
-<p><a href="/hikers/<%= session[:hiker_id] %>/edit/<%= @mountain.id %>">edit this hike</a></p>
+<p><a href="/hikers/edit/<%= @mountain.id %>">edit this hike</a></p>
