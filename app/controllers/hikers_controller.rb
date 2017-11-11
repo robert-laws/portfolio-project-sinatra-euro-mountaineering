@@ -1,7 +1,11 @@
 class HikersController < ApplicationController
-  get "/hikers/:id" do
-    @hiker = Hiker.find(session[:hiker_id])
-    erb :'hikers/index'
+  get "/hikers" do
+    if logged_in?
+      @hiker = Hiker.find(session[:hiker_id])
+      erb :'hikers/index'
+    else
+      redirect("/login")
+    end
   end
 
   get "/hikers/:id/edit" do
