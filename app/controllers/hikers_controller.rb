@@ -15,7 +15,7 @@ class HikersController < ApplicationController
   get "/hikers/show/:mountain_id" do
     @hiker = Hiker.find(session[:hiker_id])
     @mountain = Mountain.find(params[:mountain_id])
-    @details = HikerMountain.find_by(hiker_id: params[:id], mountain_id: params[:mountain_id])
+    @details = HikerMountain.find_by(hiker_id: @hiker.id, mountain_id: @mountain.id)
 
     erb :'hikers/show'
   end
@@ -23,7 +23,7 @@ class HikersController < ApplicationController
   get "/hikers/edit/:mountain_id" do
     @hiker = Hiker.find(session[:hiker_id])
     @mountain = Mountain.find(params[:mountain_id])
-    @details = HikerMountain.find_by(hiker_id: params[:id], mountain_id: params[:mountain_id])
+    @details = HikerMountain.find_by(hiker_id: @hiker.id, mountain_id: @mountain.id)
 
     erb :'hikers/edit'
   end
