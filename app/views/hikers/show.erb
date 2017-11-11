@@ -11,3 +11,8 @@
 <p>Comments: <%= @hm.comments %></p>
 
 <p><a href="/hikers/edit/<%= @hm.id %>">edit this hike</a></p>
+
+<form method="post" action="/hikers/delete/<%= @hm.id %>">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="delete this hike">
+</form>

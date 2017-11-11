@@ -84,4 +84,10 @@ class HikersController < ApplicationController
       redirect("/hikers/show/#{@hm.id}")
     end
   end
+
+  delete "/hikers/delete/:id" do
+    @hm = HikerMountain.find(params[:id])
+    @hm.delete
+    redirect("/hikers")
+  end
 end
