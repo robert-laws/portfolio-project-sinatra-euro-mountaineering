@@ -12,7 +12,7 @@
 
 <p><a href="/hikers/edit/<%= @hm.id %>">edit this hike</a></p>
 
-<form method="post" action="/hikers/delete/<%= @hm.id %>">
+<form method="post" action="/hikers/delete/<%= @hm.id %>" class="em-form">
   <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="delete this hike">
+  <input type="submit" class="button" value="delete this hike">
 </form>

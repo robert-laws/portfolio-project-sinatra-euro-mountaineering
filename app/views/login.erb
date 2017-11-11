@@ -1,12 +1,31 @@
-<h1>Login to Euro Mountaineering</h1>
 <section>
-  <form action="/login" method="POST">
-    <label><span>Username:</span> <input type="text" name="username" id="username"></label> <span><%= @valid[:un] %></span>
-    <label><span>Password:</span> <input type="password" name="password" id="password"></label> <span><%= @valid[:pw] %></span>
-    <input type="submit" id="submit" value="Login">
+  <form action="/login" method="POST" class="em-form">
+    <h1>Login to Your Account
+      <span>Please fill all the texts in the fields.</span>
+    </h1>
+
+    <label>
+      <span>Username:</span>
+      <input type="text" name="username" id="username">
+      <span><%= @valid[:un] %></span>
+    </label>
+
+
+    <label>
+      <span>Password:</span>
+      <input type="password" name="password" id="password">
+      <span><%= @valid[:pw] %></span>
+    </label>
+
+    <label>
+      <span>&nbsp;</span> 
+      <input type="submit" id="submit" class="button" value="Login">
+    </label>    
   </form>
-  <% if @result %>
-    <p>* Login Error, please try logging in again.</p>
-  <% end %>
-  <p>Don't have an account yet? <a href="/signup">Signup for a new account.</a></p>
+  <div class="em-form-help">
+    <% if @result %>
+      <p>* Login Error, please try logging in again.</p>
+    <% end %>
+    <p>Don't have an account yet? <a href="/signup">Signup for a new account.</a></p>
+  </div>
 </section>

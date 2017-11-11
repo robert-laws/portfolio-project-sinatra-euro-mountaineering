@@ -1,35 +1,53 @@
-<h1>Add a New Hike</h1>
-<form action="/hikers/new" method="POST">
-  <span>Mountain:</span>
-  <select name="mountain_id">
-    <% Mountain.all.each do |mountain| %>
-      <option value="<%= mountain.id %>"><%= mountain.name %></option>
-    <% end %>
-  </select>
+<section>
+  <form class="em-form" action="/hikers/new" method="POST">
+    <h1>Create a New Hike Entry 
+        <span>Choose a mountain and a date for a climb.</span>
+    </h1>
+    
+    <label>
+      <span>Mountain :</span>
+        <select name="mountain_id">
+        <% Mountain.all.each do |mountain| %>
+          <option value="<%= mountain.id %>"><%= mountain.name %></option>
+        <% end %>
+      </select>
+    </label>
+    
+    <label>
+      <span>Month:</span>
+      <select name="month">
+        <% (1..12).each do |v| %>
+          <option value="<%= v %>"><%= v %></option>
+        <% end %>
+      </select>
+    </label>
 
-  <span>Month:</span>
-  <select name="month">
-    <% (1..12).each do |v| %>
-      <option value="<%= v %>"><%= v %></option>
-    <% end %>
-  </select>
+    <label>
+      <span>Day:</span>
+      <select name="day">
+        <% (1..31).each do |v| %>
+          <option value="<%= v %>"><%= v %></option>
+        <% end %>
+      </select>
+    </label>
 
-  <span>Day:</span>
-  <select name="day">
-    <% (1..31).each do |v| %>
-      <option value="<%= v %>"><%= v %></option>
-    <% end %>
-  </select>
+    <label>
+      <span>Year:</span>
+      <select name="year">
+        <% (2017..2020).each do |v| %>
+          <option value="<%= v %>"><%= v %></option>
+        <% end %>
+      </select>
+    </label>
+    
+    <label>
+      <span>Comments:</span>
+      <textarea name="comments" id="comments" rows="5" cols="50"></textarea>
+    </label> 
 
-  <span>Year:</span>
-  <select name="year">
-    <% (2017..2020).each do |v| %>
-      <option value="<%= v %>"><%= v %></option>
-    <% end %>
-  </select>
-
-  <span>Comments:</span>
-  <textarea name="comments" id="comments" rows="5" cols="50"></textarea>
-
-  <input type="submit" name="submit" id="submit" value="Create New Hike">
-</form>
+      <label>
+      <span>&nbsp;</span> 
+      <input type="submit" name="submit" class="button" id="submit" value="Create New Hike">
+    </label>    
+  </form>
+</section>

@@ -21,8 +21,8 @@ class ApplicationController < Sinatra::Base
     @valid = {un: "", pw: ""}
     @result = false
 
-    params[:username] == "" ? @valid[:un] = "* enter a valid username" : @valid[:un] == ""
-    params[:password] == "" ? @valid[:pw] = "* enter a valid password" : @valid[:pw] == ""
+    params[:username] == "" ? @valid[:un] = "*" : @valid[:un] == ""
+    params[:password] == "" ? @valid[:pw] = "*" : @valid[:pw] == ""
 
     @valid.each do |k, v|
       if v == ""
@@ -56,12 +56,12 @@ class ApplicationController < Sinatra::Base
     @valid = {fn: "", ln: "", em: "", un: "", pw: ""}
     @result = false
 
-    params[:first_name] == "" ? @valid[:fn] = "* enter a valid first name" : @valid[:fn] = ""
-    params[:last_name] == "" ? @valid[:ln] = "* enter a valid last name" : @valid[:ln] = ""
-    params[:email] == "" ? @valid[:em] = "* enter a valid email" : @valid[:em] = ""
-    params[:username] == "" ? @valid[:un] = "* enter a valid username" : @valid[:un] == ""
-    params[:password] == "" ? @valid[:pw] = "* enter a valid password" : @valid[:pw] == ""
-    
+    params[:first_name] == "" ? @valid[:fn] = "*" : @valid[:fn] = ""
+    params[:last_name] == "" ? @valid[:ln] = "*" : @valid[:ln] = ""
+    params[:email] == "" ? @valid[:em] = "*" : @valid[:em] = ""
+    params[:username] == "" ? @valid[:un] = "*" : @valid[:un] == ""
+    params[:password] == "" ? @valid[:pw] = "*" : @valid[:pw] == ""
+
     @valid.each do |k, v|
       if v == ""
         @result = true

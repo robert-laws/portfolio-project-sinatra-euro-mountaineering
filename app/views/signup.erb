@@ -1,23 +1,54 @@
-<h1>Signup for Euro Mountaineering</h1>
 <section>
-    <form action="/signup" method="POST">
-      <label><span>First Name:</span><input type="text" name="first_name" id="first_name"></label> <span><%= @valid[:fn]%></span>
-      <label><span>Last Name:</span> <input type="text" name="last_name" id="last_name"></label> <span><%= @valid[:ln] %></span>
-      <label><span>Email:</span> <input type="text" name="email" id="email"></label> <span><%= @valid[:em] %></span>
-      <hr>
-      <label><span>Choose a Club:</span> 
-        <select name="club_id">
-          <% Club.all.each do |club| %>
-            <option value="<%= club.id %>"><%= club.name %></option>
-          <% end %>
-        </select>
-      </label>
-      <hr>
-      <label><span>Username:</span> <input type="text" name="username" id="username"></label> <span><%= @valid[:un] %></span>
-      <label><span>Password:</span> <input type="password" name="password" id="password"></label> <span><%= @valid[:pw] %></span>
-      <input type="submit" id="submit" value="Create Account">
-    </form>
+  <form action="/signup" method="POST" class="em-form">
+    <h1>Signup for a New Account
+      <span>Please fill all the texts in the fields.</span>
+    </h1>
+    <label>
+      <span>First Name :</span>
+      <input id="first_name" type="text" name="first_name" placeholder="Your First Name" />
+      <span><%= @valid[:fn]%></span>
+    </label>
+
+    <label>
+      <span>Last Name :</span>
+      <input id="last_name" type="text" name="last_name" placeholder="Your Last Name" />
+      <span><%= @valid[:ln] %></span>
+    </label>
+    
+    <label>
+      <span>Your Email :</span>
+      <input id="email" type="text" name="email" placeholder="Valid Email" />
+      <span><%= @valid[:em] %></span>
+    </label>
+    
+    <label>
+      <span>Choose a Club :</span>
+      <select name="club_id">
+        <% Club.all.each do |club| %>
+          <option value="<%= club.id %>"><%= club.name %></option>
+        <% end %>
+      </select>
+    </label>
+
+    <label>
+      <span>Username :</span>
+      <input id="username" type="text" name="username" placeholder="Username" />
+      <span><%= @valid[:un] %></span>
+    </label>
+    
+    <label>
+      <span>Password :</span>
+      <input id="password" type="password" name="password" placeholder="Password" />
+      <span><%= @valid[:pw] %></span>
+    </label>
+
+    <label>
+      <span>&nbsp;</span> 
+      <input type="submit" class="button" value="Create Account" />
+    </label>
+
     <% if @result %>
       <p>User account already exists. Use the <a href="/login">Login page</a> to access your account.</p>
     <% end %>
+  </form>
 </section>
