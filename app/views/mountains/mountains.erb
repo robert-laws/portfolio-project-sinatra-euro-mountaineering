@@ -1,7 +1,22 @@
-<ul>
-  <% @mountains.each do |m| %>
-    <li>
-      <a href="/mountains/<%= m.slug %>"><%= m.name %></a>
-    </li>
-  <% end %>
-</ul>
+<main>
+  <header>
+    <h1>Mountains</h1>
+    <p>All about the mountains...</p>
+  </header>
+  <hr>  
+  <section>
+    <% @mountains.each do |m| %>
+      <figure>
+        <h5>
+          <b><a href="mountains/<%= m.slug %>"><%= m.name %></a></b>
+        </h5>
+        <img src="images/mountains/<%= m.slug %>.jpg" alt="<%= m.name %>">
+        <figcaption>
+          <p><b>Country:</b> <%= m.country %></p>
+          <p><b>Height:</b> <%= m.height %> meters</p>
+          <p><b>Description:</b><span><%= m.description %></span></p>
+        </figcaption>
+      </figure>
+    <% end %>
+  </section>
+</main>

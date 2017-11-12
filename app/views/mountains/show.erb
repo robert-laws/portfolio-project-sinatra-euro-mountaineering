@@ -1,5 +1,18 @@
-<article>
-  <h1><%= @mountain.name %></h1>
-  <p>Location: <%= @mountain.country %></p>
-  <p>Height: <%= @mountain.height %> meters</p>
-</article>
+<main>
+  <header>
+    <h1>Details for <%= @mountain.name %></h1>
+  </header>
+  <hr>  
+  <section class="col-3">
+    <article class="col-3 box">
+      <div>
+        <img src="/images/mountains/<%= @mountain.slug %>.jpg" alt="<%= @mountain.name %>">
+      </div>
+      <div>
+        <p><b>Country:</b> <%= @mountain.country %></p>
+        <p><b>Height:</b> <%= @mountain.height %> meters</p>
+        <p><b>Description:</b> <%= @mountain.description %></p>
+      </div>        
+    </article>
+  </section>
+</main>
