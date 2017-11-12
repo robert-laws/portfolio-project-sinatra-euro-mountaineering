@@ -32,6 +32,7 @@ class HikersController < ApplicationController
     if logged_in?
       @hiker = Hiker.find(session[:hiker_id])
       @hm = HikerMountain.find(params[:id])
+      # test if the logged-in user can view other user hikes
 
       erb :'hikers/show'
     else
@@ -43,6 +44,8 @@ class HikersController < ApplicationController
     if logged_in?
       @hiker = Hiker.find(session[:hiker_id])
       @hm = HikerMountain.find(params[:id])
+      # test if the logged-in user can view other user hikes
+
       hike_date = @hm.hike_date.to_s.split("-")
       @year = hike_date[0]
       @month = hike_date[1]
@@ -87,6 +90,8 @@ class HikersController < ApplicationController
 
   delete "/hikers/delete/:id" do
     @hm = HikerMountain.find(params[:id])
+    # test if the logged-in user can view other user hikes
+
     @hm.delete
     redirect("/hikers")
   end
