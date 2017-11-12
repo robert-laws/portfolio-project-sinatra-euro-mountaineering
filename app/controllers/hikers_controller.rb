@@ -32,9 +32,11 @@ class HikersController < ApplicationController
     if logged_in?
       @hiker = Hiker.find(session[:hiker_id])
       @hm = HikerMountain.find(params[:id])
-      # test if the logged-in user can view other user hikes
-
-      erb :'hikers/show'
+      if @hiker.id == @hm.hiker_id
+        erb :'hikers/show'
+      else
+        redirect("/hikers")
+      end
     else
       redirect("/login")
     end
@@ -44,14 +46,15 @@ class HikersController < ApplicationController
     if logged_in?
       @hiker = Hiker.find(session[:hiker_id])
       @hm = HikerMountain.find(params[:id])
-      # test if the logged-in user can view other user hikes
-
-      hike_date = @hm.hike_date.to_s.split("-")
-      @year = hike_date[0]
-      @month = hike_date[1].to_i.to_s
-      @day = hike_date[2].split(" ")[0].to_i.to_s
-
-      erb :'hikers/edit'
+      if @hiker.id == @hm.hiker_id
+        hike_date = @hm.hike_date.to_s.split("-")
+        @year = hike_date[0]
+        @month = hike_date[1].to_i.to_s
+        @day = hike_date[2].split(" ")[0].to_i.to_s
+        erb :'hikers/edit'
+      else
+        redirect("/hikers")
+      end
     else
       redirect("/login")
     end

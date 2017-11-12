@@ -22,10 +22,9 @@
   </section>
 
   <hr>
-
-  <% @hiker_mountains.each do |hm| %>
-    <section class="col-3">
-      <h2>Your Hiking Activity</h2>
+  <section class="col-3">
+  <h2>Your Hiking Activity</h2>
+    <% @hiker_mountains.each do |hm| %>
       <article class="col-1 box">
         <h5><%= Mountain.find(hm.mountain_id).name %></h5>
         <p><b>Hike Date:</b> <%= hm.hike_date.strftime("%B %d, %Y") %></p>
@@ -34,8 +33,8 @@
           <a href="/hikers/show/<%= hm.id %>">View Details</a>
         </div>
       </article>
-    </section>
-  <% end %>
+    <% end %>
+  </section>
 
   <p>Or add a <a href="/hikers/new">new hike</a>.</p>
 </main>
