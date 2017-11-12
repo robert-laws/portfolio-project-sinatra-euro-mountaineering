@@ -1,18 +1,27 @@
-<h1>Hiker Account Info</h1>
-
-<p><%= @hiker.first_name %> <%= @hiker.last_name %></p>
-
-<p>You are a member of the <%= @hiker.club.name %>.</p>
-
-<h4>Hike Details</h4>
-<p>Mountain: <%= Mountain.find(@hm.mountain_id).name %></p>
-<p>Height: <%= Mountain.find(@hm.mountain_id).height %></p>
-<p>Hike Date: <%= @hm.hike_date.strftime("%B %d, %Y") %></p>
-<p>Comments: <%= @hm.comments %></p>
-
-<p><a href="/hikers/edit/<%= @hm.id %>">edit this hike</a></p>
-
-<form method="post" action="/hikers/delete/<%= @hm.id %>" class="em-form">
-  <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" class="button" value="delete this hike">
-</form>
+<main>
+  <header>
+    <h1>Edit your Hike...</h1>
+  </header>
+  <hr>  
+  <section class="col-3">
+    <h2>Hike Details</h2>
+    <article class="col-3 box">
+      <div>
+        <img src="/images/mountains/<%= Mountain.find(@hm.mountain_id).slug %>.jpg" alt="<%= Mountain.find(@hm.mountain_id).name %>">
+      </div>
+      <div>
+        <p><b>Mountain Name:</b> <%= Mountain.find(@hm.mountain_id).name %></p>
+        <p><b>Description:</b> <%= Mountain.find(@hm.mountain_id).description %></p>
+        <hr>
+        <p><b>Hike Date:</b> <%= @hm.hike_date.strftime("%B %d, %Y") %></p>
+        <p><b>Comments:</b> <%= @hm.comments %></p>
+        <a href="/hikers/edit/<%= @hm.id %>">edit this hike</a>
+      </div>        
+    </article>
+  </section>
+  <hr>
+  <form method="post" action="/hikers/delete/<%= @hm.id %>" class="em-form">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" class="button" value="delete this hike">
+  </form>
+</main>

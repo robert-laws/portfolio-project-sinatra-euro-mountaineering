@@ -48,8 +48,8 @@ class HikersController < ApplicationController
 
       hike_date = @hm.hike_date.to_s.split("-")
       @year = hike_date[0]
-      @month = hike_date[1]
-      @day = hike_date[2].split(" ")[0]
+      @month = hike_date[1].to_i.to_s
+      @day = hike_date[2].split(" ")[0].to_i.to_s
 
       erb :'hikers/edit'
     else

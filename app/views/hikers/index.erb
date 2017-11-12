@@ -1,26 +1,41 @@
-<h1>Hiker Account Info</h1>
+<main>
+  <header>
+    <h1>Your Account Information</h1>
+    <p>Welcome, <%= @hiker.first_name %>!</p>
+  </header>
+  <hr>  
+  <section class="col-3">
+    <h2>Your Details</h2>
+    <article class="col-2 box">
+      <img src="/images/profile.jpg" alt="Profile Image">
+      <p><b>Name:</b> <%= @hiker.first_name %> <%= @hiker.last_name %></p>
+      <p><b>Email:</b> <%= @hiker.email %></p>
+      <p><b>Username:</b> <%= @hiker.username %></p>
+      <p><b>Club Membership:</b> <%= @hiker.club.name %></p>
+      <a href="/hikers/edit">Edit your profile</a>
+    </article>
+    <article class="col-1 box">
+      <h5>Your Quick Facts</h5>
+      <p><b>Total Hikes:</b> <%= @hiker_mountains.count %></p>
+      <p><b>Tallest Mountain Climbed:</b> </p>
+    </article>
+  </section>
 
-<p><%= @hiker.first_name %> <%= @hiker.last_name %></p>
+  <hr>
 
-<p>Your contact email: <%= @hiker.email %></p>
-
-<p>You are a member of the <%= @hiker.club.name %>.</p>
-
-<p><a href="/hikers/edit">Edit your profile</a></p>
-
-<hr>
-
-<h3>Here are your completed hikes so far:</h3>
-<p>Click on a hike to view it.</p>
-
-<ul>
-  
-</ul>
-
-<ul>
   <% @hiker_mountains.each do |hm| %>
-    <li><a href="/hikers/show/<%= hm.id %>"><%= Mountain.find(hm.mountain_id).name %></a></li>
+    <section class="col-3">
+      <h2>Your Hiking Activity</h2>
+      <article class="col-1 box">
+        <h5><%= Mountain.find(hm.mountain_id).name %></h5>
+        <p><b>Hike Date:</b> <%= hm.hike_date.strftime("%B %d, %Y") %></p>
+        <p><b>Comments:</b> <%= hm.comments %></p>
+        <div>
+          <a href="/hikers/show/<%= hm.id %>">View Details</a>
+        </div>
+      </article>
+    </section>
   <% end %>
-</ul>
-<p>Or add a <a href="/hikers/new">new hike</a>.</p>
 
+  <p>Or add a <a href="/hikers/new">new hike</a>.</p>
+</main>

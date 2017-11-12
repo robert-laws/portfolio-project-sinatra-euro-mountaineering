@@ -12,6 +12,10 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get "/about" do
+    erb :about
+  end
+
   get "/login" do
     @valid = {un: "", pw: ""}
     erb :login

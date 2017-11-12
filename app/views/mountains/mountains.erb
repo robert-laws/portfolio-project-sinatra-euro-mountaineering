@@ -8,9 +8,9 @@
     <% @mountains.each do |m| %>
       <figure>
         <h5>
-          <b><a href="mountains/<%= m.slug %>"><%= m.name %></a></b>
+          <b><a href="/mountains/<%= m.slug %>"><%= m.name %></a></b>
         </h5>
-        <img src="images/mountains/<%= m.slug %>.jpg" alt="<%= m.name %>">
+        <img src="/images/mountains/<%= m.slug %>.jpg" alt="<%= m.name %>">
         <figcaption>
           <p><b>Country:</b> <%= m.country %></p>
           <p><b>Height:</b> <%= m.height %> meters</p>

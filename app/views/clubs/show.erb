@@ -1,3 +1,17 @@
-<article>
-  <h1><%= @club.name %></h1>
-</article>
+<main>
+  <header>
+    <h1>Details for <%= @club.name %></h1>
+  </header>
+  <hr>  
+  <section class="col-3">
+    <article class="col-3 box">
+      <div>
+        <img src="/images/clubs/<%= @club.slug %>.jpg" alt="<%= @club.name %>">
+      </div>
+      <div>
+        <p><b>Year Founded:</b> <%= @club.year_founded %></p>
+        <p><b>Description:</b> <%= @club.description %></p>
+      </div>        
+    </article>
+  </section>
+</main>

@@ -1,7 +1,21 @@
-<ul>
-  <% @clubs.each do |c| %>
-    <li>
-      <a href="/clubs/<%= c.slug %>"><%= c.name %></a>
-    </li>
-  <% end %>
-</ul>
+<main>
+  <header>
+    <h1>Clubs</h1>
+    <p>All about the clubs...</p>
+  </header>
+  <hr>  
+  <section>
+    <% @clubs.each do |c| %>
+      <figure>
+        <h5>
+          <b><a href="/clubs/<%= c.slug %>"><%= c.name %></a></b>
+        </h5>
+        <img src="/images/clubs/<%= c.slug %>.jpg" alt="<%= c.name %>">
+        <figcaption>
+          <p><b>Year Founded:</b> <%= c.year_founded %></p>
+          <p><b>Description:</b><span><%= c.description %></span></p>
+        </figcaption>
+      </figure>
+    <% end %>
+  </section>
+</main>
