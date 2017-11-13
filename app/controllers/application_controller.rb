@@ -36,7 +36,7 @@ class ApplicationController < Sinatra::Base
         @mes = ""
       else
         @result = false
-        @mes = "Please correct the problems marked with a *"
+        @mes = " Please correct the errors"
         break
       end
     end
@@ -78,7 +78,7 @@ class ApplicationController < Sinatra::Base
         @mes = ""
       else
         @result = false
-        @mes = "Please correct the problems marked with a *"
+        @mes = " Please correct the errors"
         break
       end
     end
