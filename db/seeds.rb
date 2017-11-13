@@ -27,6 +27,3 @@ Mountain.create(name: "Gerlachovsky stit", country: "Slovakia", height: 2655, de
 Mountain.create(name: "Moldoveanu Peak", country: "Romania", height: 2544, description: "Moldoveanu Peak, Moldovan Peak, at 2,544 metres, is the highest mountain peak in Romania. It is located in Argeș County, in the Făgăraș Mountains of the Southern Carpathians.")
 Mountain.create(name: "Galdhopiggen", country: "Norway", height: 2469, description: "Galdhøpiggen is the tallest mountain in Norway, Scandinavia and Northern Europe, at 2,469 m above sea level. It is located within the municipality of Lom, in the Jotunheimen mountain area.")
 Mountain.create(name: "Ben Nevis", country: "Scotland", height: 1344, description: "Ben Nevis is the highest mountain in the British Isles, located in Scotland. Standing at 1,345 metres above sea level, it is located at the western end of the Grampian Mountains in the Lochaber area of the Scottish Highlands, close to the town of Fort William.")
-
-# Hiker.create(first_name: "Bob", last_name: "Cobb", email: "bob@net.com", club_id: 1, username: "bobcobb", password_digest: "pass")
-# Hiker.create(first_name: "Hal", last_name: "Hope", email: "hal@info.com", club_id: 1, username: "halhope", password_digest: "pass")
