@@ -18,11 +18,13 @@ class ApplicationController < Sinatra::Base
 
   get "/login" do
     @valid = {un: "", pw: ""}
+    @mes = ""
     erb :login
   end
 
   post "/login" do
     @valid = {un: "", pw: ""}
+    @mes = ""
     @result = false
 
     params[:username] == "" ? @valid[:un] = "*" : @valid[:un] == ""
@@ -31,8 +33,10 @@ class ApplicationController < Sinatra::Base
     @valid.each do |k, v|
       if v == ""
         @result = true
+        @mes = ""
       else
         @result = false
+        @mes = "Please correct the problems marked with a *"
         break
       end
     end
@@ -53,11 +57,13 @@ class ApplicationController < Sinatra::Base
 
   get "/signup" do
     @valid = {fn: "", ln: "", em: "", un: "", pw: ""}
+    @mes = ""
     erb :signup
   end
 
   post "/signup" do
     @valid = {fn: "", ln: "", em: "", un: "", pw: ""}
+    @mes = ""
     @result = false
 
     params[:first_name] == "" ? @valid[:fn] = "*" : @valid[:fn] = ""
@@ -69,8 +75,10 @@ class ApplicationController < Sinatra::Base
     @valid.each do |k, v|
       if v == ""
         @result = true
+        @mes = ""
       else
         @result = false
+        @mes = "Please correct the problems marked with a *"
         break
       end
     end
