@@ -15,7 +15,7 @@ class HikesController < ApplicationController
     end
   end
 
-  post "/hikers/edit/:id" do
+  post "/hikes/:id/edit" do
     if params[:comments] == ""
       redirect("/hikers/edit/#{params[:id]}")
     else

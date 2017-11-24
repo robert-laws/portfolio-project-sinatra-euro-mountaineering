@@ -1,0 +1,53 @@
+<section>
+  <form action="/hikers/edit/<%= @hm.id %>" method="POST" class="em-form">
+    <h1>Edit a hike
+      <span>Update details of a hike</span>
+    </h1>
+
+    <label>
+      <span>Mountain:</span>
+      <select name="mountain_id">
+        <% Mountain.all.each do |mountain| %>
+          <option value="<%= mountain.id %>" <%='selected' if @hm.mountain_id == mountain.id %>><%= mountain.name %></option>
+        <% end %>
+      </select>
+    </label>
+
+    <label>
+      <span>Month:</span>
+      <select name="month">
+        <% (1..12).each do |v| %>
+          <option value="<%= v %>" <%='selected' if @month == v.to_s %>><%= v %></option>
+        <% end %>
+      </select>
+    </label>
+
+    <label>
+      <span>Day:</span>
+      <select name="day">
+        <% (1..31).each do |v| %>
+          <option value="<%= v %>" <%='selected' if @day == v.to_s %>><%= v %></option>
+        <% end %>
+      </select>
+    </label>
+
+    <label>
+      <span>Year:</span>
+      <select name="year">
+        <% (2017..2020).each do |v| %>
+          <option value="<%= v %>" <%='selected' if @year == v.to_s %>><%= v %></option>
+        <% end %>
+      </select>
+    </label>
+
+    <label>
+      <span>Comments:</span>
+      <textarea name="comments" id="comments" rows="5" cols="50"><%= @hm.comments %></textarea>
+    </label>
+
+    <label>
+      <span>&nbsp;</span> 
+      <input type="submit" name="submit" id="submit" class="button" value="Update Hike">
+    </label>
+  </form>
+</section>

@@ -1,53 +1,35 @@
 <section>
-  <form action="/hikers/edit/<%= @hm.id %>" method="POST" class="em-form">
-    <h1>Edit a hike
-      <span>Update details of a hike</span>
+  <form action="/hikers/edit" class="em-form" method="POST">
+    <h1>Edit Your Account
+      <span>Please fill all the texts in the fields.</span>
     </h1>
-
     <label>
-      <span>Mountain:</span>
-      <select name="mountain_id">
-        <% Mountain.all.each do |mountain| %>
-          <option value="<%= mountain.id %>" <%='selected' if @hm.mountain_id == mountain.id %>><%= mountain.name %></option>
-        <% end %>
-      </select>
+      <span>First Name :</span>
+      <input type="text" name="first_name" id="first_name" value="<%= @hiker.first_name %>">
     </label>
 
     <label>
-      <span>Month:</span>
-      <select name="month">
-        <% (1..12).each do |v| %>
-          <option value="<%= v %>" <%='selected' if @month == v.to_s %>><%= v %></option>
-        <% end %>
-      </select>
+      <span>Last Name :</span>
+      <input type="text" name="last_name" id="last_name" value="<%= @hiker.last_name %>">
     </label>
 
     <label>
-      <span>Day:</span>
-      <select name="day">
-        <% (1..31).each do |v| %>
-          <option value="<%= v %>" <%='selected' if @day == v.to_s %>><%= v %></option>
-        <% end %>
-      </select>
+      <span>Email :</span>
+      <input type="email" name="email" id="email" value="<%= @hiker.email %>">
     </label>
 
     <label>
-      <span>Year:</span>
-      <select name="year">
-        <% (2017..2020).each do |v| %>
-          <option value="<%= v %>" <%='selected' if @year == v.to_s %>><%= v %></option>
+      <span>Choose a Club :</span>
+      <select name="club_id">
+        <% Club.all.each do |club| %>
+          <option value="<%= club.id %>" <%='selected' if @hiker.club.id == club.id %>><%= club.name %></option>
         <% end %>
       </select>
-    </label>
-
-    <label>
-      <span>Comments:</span>
-      <textarea name="comments" id="comments" rows="5" cols="50"><%= @hm.comments %></textarea>
     </label>
 
     <label>
       <span>&nbsp;</span> 
-      <input type="submit" name="submit" id="submit" class="button" value="Update Hike">
+      <input type="submit" id="submit" class="button" name="submit" value="Update">
     </label>
   </form>
 </section>
