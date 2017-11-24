@@ -10,21 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 10) do
+ActiveRecord::Schema.define(version: 11) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.integer "year_founded"
-  end
-
-  create_table "hiker_mountains", force: :cascade do |t|
-    t.integer "hiker_id"
-    t.integer "mountain_id"
-    t.string "comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "hike_date"
   end
 
   create_table "hikers", force: :cascade do |t|
@@ -34,6 +25,15 @@ ActiveRecord::Schema.define(version: 10) do
     t.integer "club_id"
     t.string "username"
     t.string "password_digest"
+  end
+
+  create_table "hikes", force: :cascade do |t|
+    t.integer "hiker_id"
+    t.integer "mountain_id"
+    t.string "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "hike_date"
   end
 
   create_table "mountains", force: :cascade do |t|

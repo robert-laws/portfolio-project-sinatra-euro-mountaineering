@@ -56,8 +56,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/signup" do
-    @valid = {fn: "", ln: "", em: "", un: "", pw: ""}
-    @mes = ""
     erb :signup
   end
 
