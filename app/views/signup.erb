@@ -1,4 +1,5 @@
 <section>
+  <span><%= @error_messages %></span>
   <form action="/signup" method="POST" class="em-form">
     <h1>Signup for a New Account
       <span>Please fill all the texts in the fields.</span>
@@ -6,19 +7,16 @@
     <label>
       <span>First Name :</span>
       <input id="first_name" type="text" name="first_name" placeholder="Your First Name" />
-      <span><%= @valid[:fn]%></span>
     </label>
 
     <label>
       <span>Last Name :</span>
       <input id="last_name" type="text" name="last_name" placeholder="Your Last Name" />
-      <span><%= @valid[:ln] %></span>
     </label>
     
     <label>
       <span>Your Email :</span>
       <input id="email" type="text" name="email" placeholder="Valid Email" />
-      <span><%= @valid[:em] %></span>
     </label>
     
     <label>
@@ -33,19 +31,16 @@
     <label>
       <span>Username :</span>
       <input id="username" type="text" name="username" placeholder="Username" />
-      <span><%= @valid[:un] %></span>
     </label>
     
     <label>
       <span>Password :</span>
       <input id="password" type="password" name="password" placeholder="Password" />
-      <span><%= @valid[:pw] %></span>
     </label>
 
     <label>
       <span>&nbsp;</span> 
       <input type="submit" class="button" value="Create Account" />
-      <span><%= @mes %></span>
     </label>
 
     <% if @result %>

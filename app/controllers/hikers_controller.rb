@@ -42,11 +42,9 @@ class HikersController < ApplicationController
     end
   end
 
-  get "/hikers/edit/:id" do
+  get "/hikes/:id/edit" do
     if logged_in?
-      @hiker = Hiker.find(session[:hiker_id])
-      @hm = HikerMountain.find(params[:id])
-      if @hiker.id == @hm.hiker_id
+      if @hike = current_user.hikes.find_by(id: params[:id])
         hike_date = @hm.hike_date.to_s.split("-")
         @year = hike_date[0]
         @month = hike_date[1].to_i.to_s
@@ -72,7 +70,7 @@ class HikersController < ApplicationController
     end
   end
 
-  get "/hikers/new" do
+  get "/hikes/new" do
     if logged_in?
       erb :'hikers/new'
     else
@@ -80,22 +78,33 @@ class HikersController < ApplicationController
     end
   end
 
-  post "/hikers/new" do
+  post "/hikes" do
     if params[:comments] == ""
       redirect("/hikers/new")
     else
       date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
       mountain_id = params[:mountain_id]
-      @hm = HikerMountain.create(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
+      @hike = current_user.hikes.build(mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
       redirect("/hikers/show/#{@hm.id}")
     end
   end
 
-  delete "/hikers/delete/:id" do
-    @hm = HikerMountain.find(params[:id])
-    # test if the logged-in user can view other user hikes
+  patch "/hikes/:id" do 
+    
+  end
 
-    @hm.delete
-    redirect("/hikers")
+  delete "/hikes/:id" do
+    if logged_in?
+      @hm = HikerMountain.find(params[:id])
+      # test if the logged-in user can view other user hikes
+
+      @hm.delete
+      redirect("/hikers")
+    else 
+      ..
+    end
   end
 end
+
+# all routes taht require a logged in user no matter the http verb check if they are logged in
+# if editing something tha belong to a specific user then you want to make sure it belongs to the speicfic user making the request

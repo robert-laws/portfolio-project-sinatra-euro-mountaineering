@@ -62,34 +62,45 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-    @valid = {fn: "", ln: "", em: "", un: "", pw: ""}
-    @mes = ""
-    @result = false
+    # @valid = {fn: "", ln: "", em: "", un: "", pw: ""}
+    # @mes = ""
+    # @result = false
 
-    params[:first_name] == "" ? @valid[:fn] = "*" : @valid[:fn] = ""
-    params[:last_name] == "" ? @valid[:ln] = "*" : @valid[:ln] = ""
-    params[:email] == "" ? @valid[:em] = "*" : @valid[:em] = ""
-    params[:username] == "" ? @valid[:un] = "*" : @valid[:un] == ""
-    params[:password] == "" ? @valid[:pw] = "*" : @valid[:pw] == ""
+    # params[:first_name] == "" ? @valid[:fn] = "*" : @valid[:fn] = ""
+    # params[:last_name] == "" ? @valid[:ln] = "*" : @valid[:ln] = ""
+    # params[:email] == "" ? @valid[:em] = "*" : @valid[:em] = ""
+    # params[:username] == "" ? @valid[:un] = "*" : @valid[:un] == ""
+    # params[:password] == "" ? @valid[:pw] = "*" : @valid[:pw] == ""
 
-    @valid.each do |k, v|
-      if v == ""
-        @result = true
-        @mes = ""
-      else
-        @result = false
-        @mes = " Please correct the errors"
-        break
+    # @valid.each do |k, v|
+    #   if v == ""
+    #     @result = true
+    #     @mes = ""
+    #   else
+    #     @result = false
+    #     @mes = " Please correct the errors"
+    #     break
+    #   end
+    # end
+
+    @error_messages = []
+    params.each do |key, value|
+      if value == ""
+        @error_messages << "You are missing the #{key} field information."
       end
     end
 
-    if @result
+    if @error_messages.size == 0
       # create Hiker and save to database
-      @hiker = Hiker.find_by(username: params[:username])
-      if @hiker == nil
-        @h = Hiker.create(params)
-        session[:hiker_id] = @h.id
-        redirect("/hikers")
+      if !Hiker.find_by(username: params[:username], email: params[:email])
+        @hiker = Hiker.new(params)
+        if @hiker.save
+          session[:hiker_id] = @hiker.id
+          redirect("/hikers")
+        else 
+          @error_messages << @hiker.errors.full_messages.to_sentence
+          erb :signup
+        end
       else
         erb :signup
       end
@@ -103,13 +114,18 @@ class ApplicationController < Sinatra::Base
     redirect "/"
   end
 
+  not_found do
+    halt 404, "page not found"
+  end
+
   helpers do
     def logged_in?
-      !!session[:hiker_id]
+      !!current_user
     end
 
     def current_user
-      User.find(session[:hiker_id])
+      # memoization 
+      @current_user ||= Hiker.find_by(id: session[:hiker_id]) if session[:hiker_id]
     end
   end
 end
