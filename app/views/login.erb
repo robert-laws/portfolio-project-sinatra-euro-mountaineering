@@ -21,7 +21,7 @@
       </label>
       <br>
       <div style="text-align: center; color: red; font-weight: bold;">
-        <% if @form_incomplete %>
+        <% if @error_message %>
           <p><%= @error_message %></p>
         <% end %>
       </div>  

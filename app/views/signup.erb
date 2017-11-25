@@ -43,8 +43,11 @@
       <input type="submit" class="button" value="Create Account" />
     </label>
 
-    <% if @result %>
-      <p>User account already exists. Use the <a href="/login">Login page</a> to access your account.</p>
-    <% end %>
+    <br>
+    <div style="text-align: center; color: red; font-weight: bold;">
+      <% if @error_message %>
+        <p><%= @error_message %></p>
+      <% end %>
+    </div>  
   </form>
 </section>

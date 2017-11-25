@@ -27,12 +27,10 @@ class ApplicationController < Sinatra::Base
         session[:hiker_id] = @hiker.id
         redirect("/hikers")
       else
-        @form_incomplete = true
         @error_message = "* Login Error, please try again."
         erb :login
       end
     else
-      @form_incomplete = true
       @error_message = "* Please fill in all the form fields."
       erb :login
     end
@@ -43,17 +41,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-
-
-    @error_messages = []
-    params.each do |key, value|
-      if value == ""
-        @error_messages << "You are missing the #{key} field information."
-      end
-    end
-
-    if @error_messages.size == 0
-      # create Hiker and save to database
+    if form_filled_in?(params)
       if !Hiker.find_by(username: params[:username], email: params[:email])
         @hiker = Hiker.new(params)
         if @hiker.save
@@ -64,9 +52,11 @@ class ApplicationController < Sinatra::Base
           erb :signup
         end
       else
+        @error_message = "* User account already exists."
         erb :signup
       end
     else
+      @error_message = "* Please fill in all the form fields."
       erb :signup
     end
   end
