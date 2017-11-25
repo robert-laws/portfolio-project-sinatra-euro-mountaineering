@@ -1,5 +1,3 @@
-require 'pry'
-
 class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
@@ -22,7 +20,7 @@ class ApplicationController < Sinatra::Base
 
   post "/login" do
     if form_filled_in?(params)
-      @hiker = Hiker.find_by(username: params[:username], email: params[:email])
+      @hiker = Hiker.find_by(username: params[:username])
       if @hiker && @hiker.authenticate(params[:password])
         session[:hiker_id] = @hiker.id
         redirect("/hikers")

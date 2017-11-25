@@ -7,7 +7,7 @@ end
 use Rack::MethodOverride
 
 use HikesController
-use HikersController
+use HikerController
 use ClubsController
 use MountainsController
 run ApplicationController

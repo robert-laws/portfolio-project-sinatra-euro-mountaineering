@@ -61,4 +61,18 @@ class HikesController < ApplicationController
       
     end
   end
+
+  get "/hikes/:id/show" do
+    if logged_in?
+      @hiker = @current_user
+      @hm = HikerMountain.find(params[:id])
+      if @hiker.id == @hm.hiker_id
+        erb :'hikers/show'
+      else
+        redirect("/hiker")
+      end
+    else
+      redirect("/login")
+    end
+  end
 end
