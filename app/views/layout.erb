@@ -28,12 +28,18 @@
 
         <% end %>
 
-        <li class="login">
-          <% if session[:hiker_id] %>
+        <% if session[:hiker_id] %>
+          <li class="login">
             <a href="/logout">Logout</a>
-          <% else %>
+          </li>
+        <% else %>
+          <li class="login">
+            <a href="/signup">Signup</a>
+          </li>
+          <li class="login">
             <a href="/login">Login</a>
-          <% end %>
+          </li>
+        <% end %>
         </li>
       </ul>
     </nav>
