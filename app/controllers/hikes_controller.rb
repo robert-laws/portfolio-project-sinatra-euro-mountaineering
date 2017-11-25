@@ -1,77 +1,111 @@
 class HikesController < ApplicationController
-  get "/hikes/:id/edit" do
+  get "/hikes" do
     if logged_in?
-      if @hike = current_user.hikes.find_by(id: params[:id])
-        hike_date = @hm.hike_date.to_s.split("-")
-        @year = hike_date[0]
-        @month = hike_date[1].to_i.to_s
-        @day = hike_date[2].split(" ")[0].to_i.to_s
-        erb :'hikers/edit'
-      else
-        redirect("/hikers")
-      end
+      @hiker = @current_user
+      @hikes = Hike.where(hiker_id: @hiker.id)
+      erb :'hikes/index'
     else
       redirect("/login")
     end
   end
 
-  post "/hikes/:id/edit" do
-    if params[:comments] == ""
-      redirect("/hikers/edit/#{params[:id]}")
-    else
-      date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      mountain_id = params[:mountain_id]
-      @hm = HikerMountain.find(params[:id])
-      @hm.update(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
-      redirect("/hikers/show/#{@hm.id}")
-    end
-  end
-
   get "/hikes/new" do
     if logged_in?
-      erb :'hikers/new'
+      erb :'hikes/new'
     else
       redirect("/login")
     end
   end
 
   post "/hikes" do
-    if params[:comments] == ""
-      redirect("/hikers/new")
+    if logged_in?
+      hiker = @current_user
+      if form_filled_in?(params)
+        date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+        @hike = hiker.hikes.build(mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
+        if @hike.save
+          redirect("/hikes")
+        else
+          @error_messages << @hiker.errors.full_messages.to_sentence
+          erb :'hikes/new'
+        end  
+      else
+        @error_message = "* Please fill in all the form fields."
+        erb :'hikes/new'
+      end
     else
-      date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      mountain_id = params[:mountain_id]
-      @hike = current_user.hikes.build(mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
-      redirect("/hikers/show/#{@hm.id}")
+      redirect("/login")
     end
   end
 
+  get "/hikes/:id" do
+    if logged_in?
+      @hiker = @current_user
+      @hike = Hike.find(params[:id])
+      if @hiker.id == @hike.hiker_id
+        erb :'hikes/show'
+      else
+        redirect("/hikes")
+      end
+    else
+      redirect("/login")
+    end
+  end
+
+  get "/hikes/:id/edit" do
+    if logged_in?
+      @hiker = @current_user
+      @hike = Hike.find(params[:id])
+      if @hiker.id == @hike.hiker_id
+        hike_date = @hike.hike_date.to_s.split("-")
+        @year = hike_date[0]
+        @month = hike_date[1].to_i.to_s
+        @day = hike_date[2].split(" ")[0].to_i.to_s
+        erb :'hikes/edit'
+      else
+        redirect("/hikes")
+      end
+    else
+      redirect("/login")
+    end
+  end
+
+  post "/hikes/:id" do
+    if logged_in?
+      @hiker = @current_user
+      if form_filled_in?(params)
+        @hike = Hike.find(params[:id])
+        if @hiker.id == @hike.hiker_id
+          date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+          @hike.update(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
+          redirect("/hikes/#{params[:id]}")
+        else
+          redirect("/hikes")
+        end
+      else
+        redirect("/hikes/#{params[:id]}/edit")
+      end
+    else
+      redirect("/login")
+    end
+  end
+
+  
   patch "/hikes/:id" do 
     
   end
 
   delete "/hikes/:id" do
     if logged_in?
-      @hm = HikerMountain.find(params[:id])
-      # test if the logged-in user can view other user hikes
-
-      @hm.delete
-      redirect("/hikers")
-    else 
-      
-    end
-  end
-
-  get "/hikes/:id/show" do
-    if logged_in?
       @hiker = @current_user
-      @hm = HikerMountain.find(params[:id])
-      if @hiker.id == @hm.hiker_id
-        erb :'hikers/show'
+      @hike = Hike.find(params[:id])
+      if @hiker.id == @hike.hiker_id
+        @hike.delete
+        redirect("/hikes")
       else
-        redirect("/hiker")
+        redirect("/hikes")
       end
-    else
+    else 
       redirect("/login")
     end
   end

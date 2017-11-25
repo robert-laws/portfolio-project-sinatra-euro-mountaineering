@@ -1,5 +1,5 @@
 <section>
-  <form class="em-form" action="/hikers/new" method="POST">
+  <form class="em-form" action="/hikes" method="POST">
     <h1>Create a New Hike Entry 
         <span>Choose a mountain and a date for a climb.</span>
     </h1>
@@ -48,6 +48,13 @@
       <label>
       <span>&nbsp;</span> 
       <input type="submit" name="submit" class="button" id="submit" value="Create New Hike">
-    </label>    
+    </label>
+
+    <br>
+    <div style="text-align: center; color: red; font-weight: bold;">
+      <% if @error_message %>
+        <p><%= @error_message %></p>
+      <% end %>
+    </div>   
   </form>
 </section>

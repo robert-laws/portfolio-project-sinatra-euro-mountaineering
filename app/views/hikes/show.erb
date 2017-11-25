@@ -1,0 +1,20 @@
+<main>
+  <article class="col-3 box">
+    <div>
+      <img src="/images/mountains/<%= Mountain.find(@hike.mountain.id).slug %>.jpg" alt="<%= @hike.mountain.name %>">
+    </div>
+    <div>
+      <p><b>Mountain Name:</b> <%= @hike.mountain.name %></p>
+      <p><b>Description:</b> <%= @hike.mountain.description %></p>
+      <hr>
+      <p><b>Hike Date:</b> <%= @hike.hike_date.strftime("%B %d, %Y") %></p>
+      <p><b>Comments:</b> <%= @hike.comments %></p>
+      <a href="/hikes/<%= @hike.id %>/edit">Edit this hike</a>
+    </div>        
+  </article>
+  <hr style="margin: 20px 13px;">
+  <form style="text-align: center;" method="post" action="/hikes/<%= @hike.id %>" class="em-form">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" class="button" value="delete this hike">
+  </form>
+</main>

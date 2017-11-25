@@ -23,8 +23,8 @@
 
   <hr>
   <section class="col-3">
-  <h2>Quick View - Your Hiking Activity</h2>
     <% if @hikes.size > 0 %>
+      <h2 style="margin-bottom: 10px;">Quick View - Your Hiking Activity - <a href="/hikes">View more details and work on your hikes</a></h2>
       <% @hikes.each do |hike| %>
         <article class="col-1 box">
           <h5><%= hike.mountain.name %></h5>
@@ -32,8 +32,8 @@
           <p><b>Comments:</b> <%= hike.comments %></p>
         </article>
       <% end %>
-      <p><a href="/hikes">View and work on your hikes</a></p>
     <% else %>
+      <h2 style="margin-bottom: 10px;">Quick View - Your Hiking Activity</h2>
       <article style="padding: 30px;">
         <h4 style="margin-bottom: 15px;">You have no hikes recorded.</h4>
         <p><a href="/hikes/new">Get started by adding a new hike</a></p>

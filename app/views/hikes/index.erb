@@ -1,39 +1,22 @@
 <main>
   <header>
-    <h1>Your Hiking Activity</h1>
-    <h2>Details of all your hikes</h2>
+    <h1>Your Hiking Activity - Details of all your hikes</h1>
   </header>
   <hr>  
   <section class="col-3">
-    <h2></h2>
+    <h2>You have <%= @hikes.count %> Hike(s)</h2>
+    <br>
+    <% @hikes.each_with_index do |hike, index| %>
+      <article class="col-1 box">
+        <h5>Hike # <%= index + 1 %></h5>
 
-
-    <% @hikes.each do |hike| %>
-        <article class="col-1 box">
-          <h5><%= hike.mountain.name %></h5>
-          <p><b>Hike Date:</b> <%= hike.hike_date.strftime("%B %d, %Y") %></p>
-          <p><b>Comments:</b> <%= hike.comments %></p>
-        </article>
-      <% end %>
-
-
-    <article class="col-3 box">
-      <div>
-        <img src="/images/mountains/<%= Mountain.find(@hm.mountain_id).slug %>.jpg" alt="<%= Mountain.find(@hm.mountain_id).name %>">
-      </div>
-      <div>
-        <p><b>Mountain Name:</b> <%= Mountain.find(@hm.mountain_id).name %></p>
-        <p><b>Description:</b> <%= Mountain.find(@hm.mountain_id).description %></p>
+        <p><b>Mountain Name:</b> <%= hike.mountain.name %></p>
+        <p><b>Description:</b> <%= hike.mountain.description %></p>
         <hr>
-        <p><b>Hike Date:</b> <%= @hm.hike_date.strftime("%B %d, %Y") %></p>
-        <p><b>Comments:</b> <%= @hm.comments %></p>
-        <a href="/hikers/edit/<%= @hm.id %>">edit this hike</a>
-      </div>        
-    </article>
+        <p><b>Hike Date:</b> <%= hike.hike_date.strftime("%B %d, %Y") %></p>
+        <p><b>Comments:</b> <%= hike.comments %></p>
+        <a href="/hikes/<%= hike.id %>">View more details on this hike</a>
+      </article>
+    <% end %>
   </section>
-  <hr>
-  <form style="text-align: center;" method="post" action="/hikers/delete/<%= @hm.id %>" class="em-form">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" class="button" value="delete this hike">
-  </form>
 </main>

@@ -1,14 +1,14 @@
 <section>
-  <form action="/hikers/edit/<%= @hm.id %>" method="POST" class="em-form">
+  <form action="/hikes/<%= @hike.id %>" method="POST" class="em-form">
     <h1>Edit a hike
-      <span>Update details of a hike</span>
+      <span>Update details of your hike</span>
     </h1>
 
     <label>
       <span>Mountain:</span>
       <select name="mountain_id">
         <% Mountain.all.each do |mountain| %>
-          <option value="<%= mountain.id %>" <%='selected' if @hm.mountain_id == mountain.id %>><%= mountain.name %></option>
+          <option value="<%= mountain.id %>" <%='selected' if @hike.mountain_id == mountain.id %>><%= mountain.name %></option>
         <% end %>
       </select>
     </label>
@@ -16,8 +16,8 @@
     <label>
       <span>Month:</span>
       <select name="month">
-        <% (1..12).each do |v| %>
-          <option value="<%= v %>" <%='selected' if @month == v.to_s %>><%= v %></option>
+        <% (1..12).each do |month| %>
+          <option value="<%= month %>" <%='selected' if @month == month.to_s %>><%= month %></option>
         <% end %>
       </select>
     </label>
@@ -25,8 +25,8 @@
     <label>
       <span>Day:</span>
       <select name="day">
-        <% (1..31).each do |v| %>
-          <option value="<%= v %>" <%='selected' if @day == v.to_s %>><%= v %></option>
+        <% (1..31).each do |day| %>
+          <option value="<%= day %>" <%='selected' if @day == day.to_s %>><%= day %></option>
         <% end %>
       </select>
     </label>
@@ -34,15 +34,15 @@
     <label>
       <span>Year:</span>
       <select name="year">
-        <% (2017..2020).each do |v| %>
-          <option value="<%= v %>" <%='selected' if @year == v.to_s %>><%= v %></option>
+        <% (2017..2020).each do |year| %>
+          <option value="<%= year %>" <%='selected' if @year == year.to_s %>><%= year %></option>
         <% end %>
       </select>
     </label>
 
     <label>
       <span>Comments:</span>
-      <textarea name="comments" id="comments" rows="5" cols="50"><%= @hm.comments %></textarea>
+      <textarea name="comments" id="comments" rows="5" cols="50"><%= @hike.comments %></textarea>
     </label>
 
     <label>
