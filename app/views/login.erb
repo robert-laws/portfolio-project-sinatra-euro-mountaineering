@@ -8,26 +8,24 @@
       <label>
         <span>Username:</span>
         <input type="text" name="username" id="username">
-        <span><%= @valid[:un] %></span>
       </label>
 
       <label>
         <span>Password:</span>
         <input type="password" name="password" id="password">
-        <span><%= @valid[:pw] %></span>
       </label>
 
       <label>
         <span>&nbsp;</span> 
         <input type="submit" id="submit" class="button" value="Login">
-        <span><%= @mes %></span>
-      </label>    
+      </label>
+      <br>
+      <div style="text-align: center; color: red; font-weight: bold;">
+        <% if @form_incomplete %>
+          <p><%= @error_message %></p>
+        <% end %>
+      </div>  
     </form>
-    <div class="em-form-help">
-      <% if @result %>
-        <p>* Login Error, please try logging in again.</p>
-      <% end %>
-    </div>
   </section>
   <section style="text-align: center;">
     <p>Don't have an account yet? <a href="/signup">Signup for a new account.</a></p>

@@ -17,40 +17,23 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/login" do
-    @valid = {un: "", pw: ""}
-    @mes = ""
     erb :login
   end
 
   post "/login" do
-    @valid = {un: "", pw: ""}
-    @mes = ""
-    @result = false
-
-    params[:username] == "" ? @valid[:un] = "*" : @valid[:un] == ""
-    params[:password] == "" ? @valid[:pw] = "*" : @valid[:pw] == ""
-
-    @valid.each do |k, v|
-      if v == ""
-        @result = true
-        @mes = ""
-      else
-        @result = false
-        @mes = " Please correct the errors"
-        break
-      end
-    end
-
-    if @result
-      # authenticate hiker
-      @hiker = Hiker.find_by(username: params[:username])
+    if form_filled_in?(params)
+      @hiker = Hiker.find_by(username: params[:username], email: params[:email])
       if @hiker && @hiker.authenticate(params[:password])
         session[:hiker_id] = @hiker.id
         redirect("/hikers")
       else
+        @form_incomplete = true
+        @error_message = "* Login Error, please try again."
         erb :login
       end
     else
+      @form_incomplete = true
+      @error_message = "* Please fill in all the form fields."
       erb :login
     end
   end
@@ -60,26 +43,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-    # @valid = {fn: "", ln: "", em: "", un: "", pw: ""}
-    # @mes = ""
-    # @result = false
 
-    # params[:first_name] == "" ? @valid[:fn] = "*" : @valid[:fn] = ""
-    # params[:last_name] == "" ? @valid[:ln] = "*" : @valid[:ln] = ""
-    # params[:email] == "" ? @valid[:em] = "*" : @valid[:em] = ""
-    # params[:username] == "" ? @valid[:un] = "*" : @valid[:un] == ""
-    # params[:password] == "" ? @valid[:pw] = "*" : @valid[:pw] == ""
-
-    # @valid.each do |k, v|
-    #   if v == ""
-    #     @result = true
-    #     @mes = ""
-    #   else
-    #     @result = false
-    #     @mes = " Please correct the errors"
-    #     break
-    #   end
-    # end
 
     @error_messages = []
     params.each do |key, value|
@@ -124,6 +88,10 @@ class ApplicationController < Sinatra::Base
     def current_user
       # memoization 
       @current_user ||= Hiker.find_by(id: session[:hiker_id]) if session[:hiker_id]
+    end
+
+    def form_filled_in?(form_fields)
+      form_fields.each {|key, value| break if value == "" }
     end
   end
 end
