@@ -6,11 +6,14 @@
   <section class="col-3">
     <h2>You have <%= @hikes.count %> Hike(s)</h2>
     <br>
+    <h3><a href="/hikes/new">Add a new hike</a></h3>
+    <br>
     <% @hikes.each_with_index do |hike, index| %>
       <article class="col-1 box">
         <h5>Hike # <%= index + 1 %></h5>
 
         <p><b>Mountain Name:</b> <%= hike.mountain.name %></p>
+        <p><b>Height:</b> <%= hike.mountain.height %> meters</p>
         <p><b>Description:</b> <%= hike.mountain.description %></p>
         <hr>
         <p><b>Hike Date:</b> <%= hike.hike_date.strftime("%B %d, %Y") %></p>

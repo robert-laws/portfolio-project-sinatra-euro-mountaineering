@@ -23,7 +23,7 @@ class ApplicationController < Sinatra::Base
       @hiker = Hiker.find_by(username: params[:username])
       if @hiker && @hiker.authenticate(params[:password])
         session[:hiker_id] = @hiker.id
-        redirect("/hikers")
+        redirect("/hiker")
       else
         @error_message = "* Login Error, please try again."
         erb :login
@@ -44,7 +44,7 @@ class ApplicationController < Sinatra::Base
         @hiker = Hiker.new(params)
         if @hiker.save
           session[:hiker_id] = @hiker.id
-          redirect("/hikers")
+          redirect("/hiker")
         else 
           @error_messages << @hiker.errors.full_messages.to_sentence
           erb :signup

@@ -24,7 +24,7 @@
   <hr>
   <section class="col-3">
     <% if @hikes.size > 0 %>
-      <h2 style="margin-bottom: 10px;">Quick View - Your Hiking Activity - <a href="/hikes">View more details and work on your hikes</a></h2>
+      <h2 style="margin-bottom: 10px;">Quick View - Your Hiking Activity - <a href="/hikes">View more details about your hikes</a> or <a href="/hikes/new">add a new hike</a></h2>
       <% @hikes.each do |hike| %>
         <article class="col-1 box">
           <h5><%= hike.mountain.name %></h5>
@@ -40,6 +40,4 @@
       </article>
     <% end %>
   </section>
-
-  
 </main>
