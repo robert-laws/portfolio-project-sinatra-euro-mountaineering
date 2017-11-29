@@ -70,12 +70,32 @@ class HikesController < ApplicationController
     end
   end
 
-  post "/hikes/:id" do
+  # post "/hikes/:id" do
+  #   if logged_in?
+  #     @hiker = @current_user
+  #     if form_filled_in?(params)
+  #       @hike = Hike.find_by_id(params[:id])
+  #       if @hiker.id == @hike.hiker_id
+  #         date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+  #         @hike.update(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
+  #         redirect("/hikes/#{params[:id]}")
+  #       else
+  #         redirect("/hikes")
+  #       end
+  #     else
+  #       redirect("/hikes/#{params[:id]}/edit")
+  #     end
+  #   else
+  #     redirect("/login")
+  #   end
+  # end
+
+
+  patch "/hikes/:id" do 
     if logged_in?
       @hiker = @current_user
       if form_filled_in?(params)
-        @hike = Hike.find(params[:id])
-        if @hiker.id == @hike.hiker_id
+        if Hike.find_by_id(params[:id]).hiker_id == @hiker.id
           date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
           @hike.update(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
           redirect("/hikes/#{params[:id]}")
@@ -90,10 +110,13 @@ class HikesController < ApplicationController
     end
   end
 
-  
-  patch "/hikes/:id" do 
-    
-  end
+  # patch '/posts/:id' do #edit action
+  #   @post = Post.find_by_id(params[:id])
+  #   @post.title = params[:title]
+  #   @post.content = params[:content]
+  #   @post.save
+  #   redirect to "/posts/#{@post.id}"
+  # end
 
   delete "/hikes/:id" do
     if logged_in?

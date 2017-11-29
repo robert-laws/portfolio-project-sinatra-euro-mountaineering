@@ -1,5 +1,7 @@
 <section>
   <form action="/hikes/<%= @hike.id %>" method="POST" class="em-form">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    
     <h1>Edit a hike
       <span>Update details of your hike</span>
     </h1>
