@@ -45,7 +45,7 @@ class ApplicationController < Sinatra::Base
         if @hiker.save
           session[:hiker_id] = @hiker.id
           redirect("/hiker")
-        else 
+        else
           @error_messages << @hiker.errors.full_messages.to_sentence
           erb :signup
         end
@@ -74,7 +74,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      # memoization 
+      # memoization
       @current_user ||= Hiker.find_by(id: session[:hiker_id]) if session[:hiker_id]
     end
 

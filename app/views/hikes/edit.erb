@@ -3,7 +3,7 @@
     <input id="hidden" type="hidden" name="_method" value="patch">
     
     <h1>Edit a hike
-      <span>Update details of your hike</span>
+      <span>Details of your hike</span>
     </h1>
 
     <label>
@@ -52,4 +52,11 @@
       <input type="submit" name="submit" id="submit" class="button" value="Update Hike">
     </label>
   </form>
+
+  <br>
+  <div style="text-align: center; color: red; font-weight: bold;">
+    <% if @error_message %>
+      <p><%= @error_message %></p>
+    <% end %>
+  </div>
 </section>

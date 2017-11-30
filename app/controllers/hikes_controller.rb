@@ -26,9 +26,9 @@ class HikesController < ApplicationController
         if @hike.save
           redirect("/hikes")
         else
-          @error_messages << @hiker.errors.full_messages.to_sentence
+          @error_messages << @hike.errors.full_messages.to_sentence
           erb :'hikes/new'
-        end  
+        end
       else
         @error_message = "* Please fill in all the form fields."
         erb :'hikes/new'
@@ -50,7 +50,7 @@ class HikesController < ApplicationController
         end
       else
         redirect("/hikes")
-      end      
+      end
     else
       redirect("/login")
     end
@@ -78,40 +78,25 @@ class HikesController < ApplicationController
     end
   end
 
-  # post "/hikes/:id" do
-  #   if logged_in?
-  #     @hiker = @current_user
-  #     if form_filled_in?(params)
-  #       @hike = Hike.find_by_id(params[:id])
-  #       if @hiker.id == @hike.hiker_id
-  #         date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-  #         @hike.update(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
-  #         redirect("/hikes/#{params[:id]}")
-  #       else
-  #         redirect("/hikes")
-  #       end
-  #     else
-  #       redirect("/hikes/#{params[:id]}/edit")
-  #     end
-  #   else
-  #     redirect("/login")
-  #   end
-  # end
-
-
-  patch "/hikes/:id" do 
+  patch "/hikes/:id" do
     if logged_in?
-      @hiker = @current_user
+      hiker = @current_user
       if form_filled_in?(params)
         @hike = Hike.find_by_id(params[:id])
         if @hiker.id == @hike.hiker_id
           date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-          @hike.update(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
-          redirect("/hikes/#{params[:id]}")
+          @edited_hike = hiker.hikes.build(mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
+          if @edited_hike.update
+            redirect("/hikes/#{params[:id]}")
+          else
+            @error_messages << @edited_hike.errors.full_messages.to_sentence
+            erb :'hikes/new'
+          end
         else
           redirect("/hikes")
         end
       else
+        @error_message = "* Please fill in all the form fields."
         redirect("/hikes/#{params[:id]}/edit")
       end
     else
@@ -122,14 +107,14 @@ class HikesController < ApplicationController
   delete "/hikes/:id" do
     if logged_in?
       @hiker = @current_user
-      @hike = Hike.find(params[:id])
+      @hike = Hike.find_by_id(params[:id])
       if @hiker.id == @hike.hiker_id
         @hike.delete
         redirect("/hikes")
       else
         redirect("/hikes")
       end
-    else 
+    else
       redirect("/login")
     end
   end

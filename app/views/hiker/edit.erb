@@ -32,4 +32,11 @@
       <input type="submit" id="submit" class="button" name="submit" value="Update">
     </label>
   </form>
+
+  <br>
+  <div style="text-align: center; color: red; font-weight: bold;">
+    <% if @error_message %>
+      <p><%= @error_message %></p>
+    <% end %>
+  </div>
 </section>
