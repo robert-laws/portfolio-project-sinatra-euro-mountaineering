@@ -41,7 +41,7 @@ class HikesController < ApplicationController
   get "/hikes/:id" do
     if logged_in?
       @hiker = @current_user
-      @hike = Hike.find_by_id(params[:id])
+      @hike = Hike.find_by(id: params[:id])
       if @hike # scenario where hikes id does not exist
         if @hiker.id == @hike.hiker_id
           erb :'hikes/show'
@@ -59,7 +59,7 @@ class HikesController < ApplicationController
   get "/hikes/:id/edit" do
     if logged_in?
       @hiker = @current_user
-      @hike = Hike.find_by_id(params[:id])
+      @hike = Hike.find_by(id: params[:id])
       if @hike # scenario where hikes id does not exist
         if @hiker.id == @hike.hiker_id
           hike_date = @hike.hike_date.to_s.split("-")
@@ -82,7 +82,7 @@ class HikesController < ApplicationController
     if logged_in?
       hiker = @current_user
       if form_filled_in?(params)
-        @hike = Hike.find_by_id(params[:id])
+        @hike = Hike.find_by(id: params[:id])
         if @hiker.id == @hike.hiker_id
           date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
           @edited_hike = hiker.hikes.build(mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
@@ -107,7 +107,7 @@ class HikesController < ApplicationController
   delete "/hikes/:id" do
     if logged_in?
       @hiker = @current_user
-      @hike = Hike.find_by_id(params[:id])
+      @hike = Hike.find_by(id: params[:id])
       if @hiker.id == @hike.hiker_id
         @hike.delete
         redirect("/hikes")
