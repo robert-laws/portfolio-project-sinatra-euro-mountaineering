@@ -80,13 +80,12 @@ class HikesController < ApplicationController
 
   patch "/hikes/:id" do
     if logged_in?
-      hiker = @current_user
+      @hiker = @current_user
       if form_filled_in?(params)
         @hike = Hike.find_by(id: params[:id])
         if @hiker.id == @hike.hiker_id
           date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-          @edited_hike = hiker.hikes.build(mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
-          if @edited_hike.update
+          if @hike.update(hiker_id: session[:hiker_id], mountain_id: params[:mountain_id], comments: params[:comments], hike_date: date)
             redirect("/hikes/#{params[:id]}")
           else
             @error_messages << @edited_hike.errors.full_messages.to_sentence

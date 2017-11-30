@@ -18,12 +18,11 @@ class HikerController < ApplicationController
     end
   end
 
-  post "/hiker/edit" do
+  patch "/hiker/edit" do
     if logged_in?
       @hiker = @current_user
       if form_filled_in?(params)
-        @hiker.build(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], club_id: params[:club_id])
-        if @hiker.update
+        if @hiker.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], club_id: params[:club_id])
           redirect("/hiker")
         else
           @error_messages << @hiker.errors.full_messages.to_sentence
